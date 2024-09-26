@@ -33,6 +33,8 @@ firewall-cmd --add-port=53/tcp --zone=internal --permanent
 firewall-cmd --add-port=5001/tcp --zone=external --permanent
 firewall-cmd --add-port=5001/udp --zone=internal --permanent
 firewall-cmd --add-port=$ssh_port/tcp --zone=external --permanent
+firewall-cmd --add-port=$ssh_port/udp --zone=external --permanent
+firewall-cmd --add-port=$ssh_port/tcp --zone=internal --permanent
 firewall-cmd --add-port=$ssh_port/udp --zone=internal --permanent
 
 # Применение изменений
@@ -73,9 +75,8 @@ firewall-cmd --add-port=53/tcp --zone=external --permanent
 firewall-cmd --add-port=53/udp --zone=internal --permanent
 firewall-cmd --add-port=53/tcp --zone=internal --permanent
 firewall-cmd --add-port=5001/tcp --zone=external --permanent
-firewall-cmd --add-port=5001/udp --zone=internal --permanent
 firewall-cmd --add-port=$ssh_port/tcp --zone=external --permanent
-firewall-cmd --add-port=$ssh_port/udp --zone=internal --permanent
+firewall-cmd --add-port=$ssh_port/tcp --zone=internal --permanent
 
 # Применение изменений
 firewall-cmd --reload
@@ -83,3 +84,5 @@ firewall-cmd --reload
 # Вывод настроек для проверки
 firewall-cmd --list-all --zone=external
 firewall-cmd --list-all --zone=internal
+
+semanage port -a -t $ssh_port -p tcp
