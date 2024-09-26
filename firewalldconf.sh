@@ -4,6 +4,8 @@ ssh_port=2222
 internal=ens36
 external=ens33
 
+systemctl enable --now firewalld
+
 # Привязка интерфейсов к зонам
 firewall-cmd --permanent --change-interface=$internal --zone=internal
 firewall-cmd --permanent --change-interface=$external --zone=external
